@@ -89,7 +89,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.05] mb-6"
+            className="text-3xl sm:text-6xl lg:text-7xl font-serif font-bold text-white leading-[1.05] mb-6"
             variants={enterVariants}
             initial="hidden"
             animate="visible"
