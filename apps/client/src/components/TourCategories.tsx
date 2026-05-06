@@ -97,6 +97,7 @@ export default function TourCategories() {
                     transition={{ duration: 0.35, ease: 'easeOut' }}
                     className="h-full"
                   >
+                    <Link href="/tours">
                     <div className="relative h-48 overflow-hidden">
                       <motion.img
                         src={categoryImages[index]}
@@ -157,6 +158,7 @@ export default function TourCategories() {
                         </Link>
                       )}
                     </div>
+                    </Link>
                   </motion.div>
                 </motion.article>
               );

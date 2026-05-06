@@ -6,9 +6,9 @@ import { translations } from '@/i18n';
 import { Button } from '@/components/ui/button';
 
 const slideImages = [
-  'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=1920',
-  'https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1920',
-  'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1920',
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Garni_Temple_at_Sunset%2C_Armenia.jpg/1920px-Garni_Temple_at_Sunset%2C_Armenia.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/a/ab/-2025.05_Татевский_монастырь_7.jpg',
+  'https://pohcdn.com/sites/default/files/styles/paragraph__hero_banner__hb_image__2350bp/public/hero_banner/grand-cascade-yerevan_optimized.jpg',
 ];
 
 const enterVariants = {
