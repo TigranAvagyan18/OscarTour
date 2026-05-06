@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
 	return (
-		<Html lang="be">
+		<Html lang="hy">
 			<Head>
 				{/* Character encoding and viewport */}
 				<meta charSet="utf-8" />
