@@ -147,12 +147,12 @@ export default function Header() {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
-
+{/* 
             <Button asChild variant="gold" size="pill" className="text-sm px-5 py-2.5">
               <Link href="/tours">
                 {t('common.nav.bookATour')}
               </Link>
-            </Button>
+            </Button> */}
           </div>
 
           <button
@@ -202,11 +202,11 @@ export default function Header() {
                   </button>
                 ))}
               </div>
-              <Button asChild variant="gold" size="pill" className="text-center w-full justify-center mt-1">
+              {/* <Button asChild variant="gold" size="pill" className="text-center w-full justify-center mt-1">
                 <Link href="/tours">
                   {t('common.nav.bookATour')}
                 </Link>
-              </Button>
+              </Button> */}
             </div>
           </nav>
         </div>

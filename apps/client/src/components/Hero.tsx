@@ -128,7 +128,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-3 gap-6 max-w-sm"
+            className="hidden md:grid grid-cols-3 gap-6 max-w-sm"
             variants={enterVariants}
             initial="hidden"
             animate="visible"

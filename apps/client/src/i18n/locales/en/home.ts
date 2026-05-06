@@ -1,9 +1,9 @@
 export const home = {
 	hero: {
 		slides: [
-			{ tagline: 'Explore Armenia', subline: 'with Exclusive Tours', location: 'Aragats Mountains' },
+			{ tagline: 'Explore Armenia', subline: 'with Exclusive Tours', location: 'Garni Temple' },
 			{ tagline: 'Discover Ancient', subline: 'Monasteries & Culture', location: 'Tatev Monastery' },
-			{ tagline: 'Journey Through', subline: 'Timeless Landscapes', location: 'Lake Sevan' },
+			{ tagline: 'Journey Through', subline: 'Timeless Landscapes', location: 'Grand Cascade' },
 		],
 		description: "From ancient monasteries to volcanic peaks — experience Armenia's extraordinary culture and nature with our expertly curated tours.",
 		findTours: 'Find Tours',

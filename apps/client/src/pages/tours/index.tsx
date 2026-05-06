@@ -85,7 +85,7 @@ export default function ToursPage() {
   return (
     <div className="min-h-screen bg-cream">
       <section
-        className="relative py-28 overflow-hidden"
+        className="relative pt-20 py-10 md:py-28 overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #081622 0%, #0B4F6C 100%)' }}
       >
         <div
@@ -102,10 +102,10 @@ export default function ToursPage() {
             <Sparkles className="w-4 h-4" />
             {t('tours.badge')}
           </div>
-          <h1 className="text-5xl md:text-6xl font-serif font-bold text-white mb-5 leading-tight">
+          <h1 className="hidden md:block text-5xl md:text-6xl font-serif font-bold text-white mb-5 leading-tight">
             {t('tours.title')} <span className="text-gradient-gold">{t('tours.titleHighlight')}</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto mb-10">
+          <p className="hidden md:block text-white/60 text-lg max-w-2xl mx-auto mb-10">
             {t('tours.subtitle')}
           </p>
 
@@ -312,7 +312,7 @@ export default function ToursPage() {
                       )}
                       <div className="flex items-baseline gap-1">
                         <span className="text-gold-600 font-bold text-xl font-serif">{tour.price.toLocaleString()}</span>
-                        <span className="text-gray-400 text-xs">AMD / {t('tours.perPerson')}</span>
+                        <span className="text-gray-400 text-xs hidden sm:inline-block">AMD / {t('tours.perPerson')}</span>
                       </div>
                     </div>
                     <Link
