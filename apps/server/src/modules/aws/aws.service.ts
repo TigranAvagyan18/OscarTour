@@ -35,7 +35,7 @@ export class AWS {
 		try {
 			const response = await axios.get(url, { responseType: 'arraybuffer' });
 
-			const mimeType = response.headers['content-type'];
+			const mimeType = response.headers['content-type'] as string;
 
 			const fileName = keepOriginalName ? url.split('/').pop() : randomUUID() + '.' + mimeType.split('/').pop();
 
