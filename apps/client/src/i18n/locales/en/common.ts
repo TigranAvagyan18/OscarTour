@@ -1,0 +1,36 @@
+export const common = {
+	nav: {
+		home: 'Home',
+		tours: 'Tours',
+		destinations: 'Destinations',
+		about: 'About',
+		contact: 'Contact',
+		bookATour: 'Book a Tour',
+	},
+	footer: {
+		description: "Connecting explorers to Armenia's extraordinary heritage, landscapes, and culture since 2012. Your trusted partner for unforgettable journeys.",
+		quickLinks: 'Quick Links',
+		support: 'Support',
+		stayInspired: 'Stay Inspired',
+		newsletter: 'Get travel tips, early deals, and Armenia stories delivered to your inbox.',
+		subscribed: "Thank you for subscribing! We'll be in touch soon.",
+		paymentMethods: 'We Accept',
+		copyright: 'ArmeniaTours. All rights reserved.',
+		links: {
+			home: 'Home',
+			groupTours: 'Group Tours',
+			privateTours: 'Private Tours',
+			destinations: 'Destinations',
+			aboutUs: 'About Us',
+			blog: 'Blog',
+		},
+		supportLinks: {
+			faq: 'FAQ',
+			bookingPolicy: 'Booking Policy',
+			cancellation: 'Cancellation',
+			privacyPolicy: 'Privacy Policy',
+			terms: 'Terms of Service',
+			accessibility: 'Accessibility',
+		},
+	},
+};

@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: OscarTour
+      TZ: 'GMT+0'
+      PGTZ: 'GMT+0'
+    ports:
+      - "5432:5432"
+      # - "127.0.0.1:5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - local-network
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      # - "6379:6379"
+      - "127.0.0.1:6379:6379"
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PORT=6379
+    networks:
+      - local-network
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.5
+    restart: unless-stopped
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+      MEILI_ENV: ${MEILI_ENV:-development}
+    ports:
+      - "${MEILI_PORT:-7700}:7700"
+    networks:
+      - local-network
+
+networks:
+  local-network:
+    driver: bridge

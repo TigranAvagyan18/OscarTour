@@ -1,0 +1,107 @@
+export const resetPasswordEmailTemplate = (resetLink: string): string => {
+	return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Your Password</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5;">
+        <tr>
+            <td style="padding: 40px 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; box-shadow: 0 4px 24px rgba(232, 40, 140, 0.08); overflow: hidden;">
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #E8288C 0%, #D61F7D 100%); padding: 48px 40px; text-align: center;">
+                            <img src="https://flowerfinder.be/logo.png" alt="FlowerFinder Logo" width="80" height="80" style="display: block; margin: 0 auto 24px; border-radius: 12px; background-color: rgba(255, 255, 255, 0.95); padding: 12px;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">Reset Your Password</h1>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="padding: 48px 40px;">
+                            <p style="margin: 0 0 24px; color: #333333; font-size: 16px; line-height: 1.6;">
+                                Hello!
+                            </p>
+                            <p style="margin: 0 0 32px; color: #666666; font-size: 16px; line-height: 1.6;">
+                                We received a request to reset your password for your FlowerFinder account. Click the button below to create a new password.
+                            </p>
+                            
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="text-align: center; padding: 0 0 32px;">
+                                        <a href="${resetLink}" style="display: inline-block; background: linear-gradient(135deg, #E8288C 0%, #D61F7D 100%); color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none; padding: 16px 48px; border-radius: 12px; box-shadow: 0 4px 16px rgba(232, 40, 140, 0.25); transition: all 0.3s ease;">
+                                            Reset Password
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #FFF5FA; border-left: 4px solid #E8288C; border-radius: 8px; margin-bottom: 32px;">
+                                <tr>
+                                    <td style="padding: 20px 24px;">
+                                        <p style="margin: 0 0 12px; color: #333333; font-size: 14px; font-weight: 600;">
+                                            Link not working?
+                                        </p>
+                                        <p style="margin: 0 0 8px; color: #666666; font-size: 14px; line-height: 1.5;">
+                                            Copy and paste this URL into your browser:
+                                        </p>
+                                        <p style="margin: 0; color: #E8288C; font-size: 13px; word-break: break-all; font-family: 'Courier New', monospace;">
+                                            ${resetLink}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #FFF9F0; border-left: 4px solid #F59E0B; border-radius: 8px; margin-bottom: 24px;">
+                                <tr>
+                                    <td style="padding: 20px 24px;">
+                                        <p style="margin: 0 0 8px; color: #333333; font-size: 14px; font-weight: 600;">
+                                            ⚠️ Security Notice
+                                        </p>
+                                        <p style="margin: 0; color: #666666; font-size: 14px; line-height: 1.5;">
+                                            This password reset link will expire in 30 minutes. If you didn't request a password reset, please ignore this email or contact support if you're concerned about your account security.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="margin: 0; color: #999999; font-size: 14px; line-height: 1.6;">
+                                For your security, this link can only be used once. If you need to reset your password again, you'll need to submit a new request.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="background-color: #FAFAFA; padding: 32px 40px; border-top: 1px solid #F0F0F0;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <p style="margin: 0 0 8px; color: #999999; font-size: 13px;">
+                                            Need help? Contact us at <a href="mailto:support@flowerfinder.be" style="color: #E8288C; text-decoration: none; font-weight: 600;">support@flowerfinder.be</a>
+                                        </p>
+                                        <p style="margin: 0; color: #CCCCCC; font-size: 12px;">
+                                            &copy; 2026 FlowerFinder. All rights reserved.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 24px auto 0;">
+                    <tr>
+                        <td style="text-align: center; padding: 0 20px;">
+                            <p style="margin: 0; color: #999999; font-size: 12px; line-height: 1.5;">
+                                This email was sent to you because someone requested a password reset for your FlowerFinder account.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>`;
+};

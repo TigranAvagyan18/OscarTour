@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 40% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 40% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 40% 10%;
+    --primary: 200 80% 24%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 38 83% 52%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 40 20% 96%;
+    --muted-foreground: 210 15% 46%;
+    --accent: 38 83% 52%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 15% 90%;
+    --input: 210 15% 90%;
+    --ring: 200 80% 24%;
+    --radius: 0.75rem;
+    --chart-1: 200 80% 40%;
+    --chart-2: 38 83% 52%;
+    --chart-3: 160 55% 40%;
+    --chart-4: 30 80% 55%;
+    --chart-5: 340 75% 55%;
+  }
+  .dark {
+    --background: 330 20% 8%;
+    --foreground: 330 20% 95%;
+    --card: 330 15% 12%;
+    --card-foreground: 330 20% 95%;
+    --popover: 330 15% 12%;
+    --popover-foreground: 330 20% 95%;
+    --primary: 330 81% 65%;
+    --primary-foreground: 330 20% 10%;
+    --secondary: 330 15% 18%;
+    --secondary-foreground: 330 20% 90%;
+    --muted: 330 15% 18%;
+    --muted-foreground: 330 10% 65%;
+    --accent: 330 15% 18%;
+    --accent-foreground: 330 20% 90%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 330 15% 20%;
+    --input: 330 15% 20%;
+    --ring: 330 81% 65%;
+    --chart-1: 330 81% 65%;
+    --chart-2: 280 70% 60%;
+    --chart-3: 320 75% 60%;
+    --chart-4: 340 80% 65%;
+    --chart-5: 310 65% 70%;
+    --sidebar-background: 330 15% 12%;
+    --sidebar-foreground: 330 20% 90%;
+    --sidebar-primary: 330 81% 65%;
+    --sidebar-primary-foreground: 330 20% 10%;
+    --sidebar-accent: 330 15% 18%;
+    --sidebar-accent-foreground: 330 20% 90%;
+    --sidebar-border: 330 15% 20%;
+    --sidebar-ring: 330 81% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+body[data-scroll-locked][data-scroll-locked] {
+	margin-right: 0 !important;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #0B4F6C 0%, #3990C3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #E8A020 0%, #F2C75C 60%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
