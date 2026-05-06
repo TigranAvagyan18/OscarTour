@@ -79,13 +79,13 @@ export default function Header() {
             href="/"
             onClick={handleLogoClick}
             className="flex items-center gap-2.5 group"
-            aria-label="ArmeniaTours Home"
+            aria-label="OscarTour Home"
           >
             <div className="w-8 h-8 rounded-lg bg-gold-500 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
               <Map className="w-4 h-4 text-white" strokeWidth={2.5} />
             </div>
             <span className="text-white font-serif font-bold text-xl tracking-tight">
-              Armenia<span className="text-gold-400">Tours</span>
+              Oscar<span className="text-gold-400">Tour</span>
             </span>
           </a>
 

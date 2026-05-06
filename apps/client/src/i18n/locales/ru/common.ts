@@ -15,7 +15,7 @@ export const common = {
 		newsletter: 'Получайте советы по путешествиям, ранние предложения и истории об Армении на свою почту.',
 		subscribed: 'Спасибо за подписку! Мы скоро свяжемся с вами.',
 		paymentMethods: 'Принимаем',
-		copyright: 'ArmeniaTours. Все права защищены.',
+		copyright: 'OscarTour. Все права защищены.',
 		links: {
 			home: 'Главная',
 			groupTours: 'Групповые туры',

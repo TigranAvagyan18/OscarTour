@@ -15,7 +15,7 @@ export const common = {
 		newsletter: 'Get travel tips, early deals, and Armenia stories delivered to your inbox.',
 		subscribed: "Thank you for subscribing! We'll be in touch soon.",
 		paymentMethods: 'We Accept',
-		copyright: 'ArmeniaTours. All rights reserved.',
+		copyright: 'OscarTour. All rights reserved.',
 		links: {
 			home: 'Home',
 			groupTours: 'Group Tours',

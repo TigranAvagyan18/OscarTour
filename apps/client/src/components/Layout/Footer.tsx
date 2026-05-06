@@ -55,7 +55,7 @@ export default function Footer() {
                 <Map className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <span className="text-white font-serif font-bold text-xl">
-                Armenia<span className="text-gold-400">Tours</span>
+                Oscar<span className="text-gold-400">Tour</span>
               </span>
             </a>
 
