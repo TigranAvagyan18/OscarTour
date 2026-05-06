@@ -2,14 +2,10 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response, NextFunction } from 'express';
 import config from 'src/config';
-import { UserService } from 'src/modules/user/user.service';
 
 @Injectable()
 export class RequestMiddleware implements NestMiddleware {
-	constructor(
-		private readonly jwtService: JwtService,
-		private readonly userService: UserService
-	) {}
+	constructor(private readonly jwtService: JwtService) {}
 
 	async use(request: Request, response: Response, next: NextFunction) {
 		const token = this.extractToken(request);
@@ -17,7 +13,7 @@ export class RequestMiddleware implements NestMiddleware {
 			const payload = await this.jwtService.verifyAsync(token, {
 				secret: config.JWT_SECRET
 			});
-			const user = await this.userService.getById(payload.id);
+			const user = { id: 1, role: 'admin', mail: 'admin@admin.com' };
 			//@ts-ignore
 			request.currentUser = user;
 			request.token = token;

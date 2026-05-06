@@ -6,16 +6,6 @@ import { MicroserviceService } from './microservice.service';
 export class MicroserviceController {
 	constructor(private readonly microserviceService: MicroserviceService) {}
 
-	@MessagePattern('get_user')
-	getUser(data: any) {
-		return this.microserviceService.getUser(data);
-	}
-
-	@MessagePattern('create_user')
-	createUser(data: any) {
-		return this.microserviceService.createUser(data);
-	}
-
 	@MessagePattern('log')
 	handleLog(data: any) {
 		return this.microserviceService.handleLog(data);

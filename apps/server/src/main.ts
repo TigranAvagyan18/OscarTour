@@ -96,11 +96,11 @@ async function bootstrap() {
 
 	app.enableCors({ credentials: true, origin: config.APP_URL });
 
-	const redisIoAdapter = new RedisIoAdapter(app);
-	await redisIoAdapter.connectToRedis();
-	app.useWebSocketAdapter(redisIoAdapter);
+	// const redisIoAdapter = new RedisIoAdapter(app);
+	// await redisIoAdapter.connectToRedis();
+	// app.useWebSocketAdapter(redisIoAdapter);
 
-	await app.startAllMicroservices();
+	// await app.startAllMicroservices();
 	await app.listen(config.PORT, '0.0.0.0');
 	logger.log('Server is running on port ' + config.PORT);
 	const publisher = app.get<PublisherService>(PublisherService);

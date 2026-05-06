@@ -1,12 +1,10 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { createClient } from 'redis';
 import config from 'src/config';
-import { UserModule } from '../user/user.module';
 import { EventGateway } from './event.gateway';
 import { PublisherService } from './publisher.service';
 
 @Module({
-	imports: [forwardRef(() => UserModule)],
 	providers: [
 		EventGateway,
 		PublisherService,

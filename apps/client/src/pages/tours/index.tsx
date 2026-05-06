@@ -4,9 +4,20 @@ import {
   Search, Clock, MapPin, Star, ArrowRight, Users, Filter,
   ChevronDown, X, Calendar, Sparkles,
 } from 'lucide-react';
-import { detailedTours, TourCategory } from '@/data/toursData';
+import { useGetPublishedTours } from '@/generated/index';
 import { useTranslation } from '@/providers/TranslationProvider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+type TourCategory = 'group' | 'private' | 'package';
+
+// Fields not present in scraped data — same value for all tours
+const STATIC_TOUR_DEFAULTS = {
+  region: 'Armenia',
+  tags: [] as string[],
+  departures: [] as { days: string; times: string[] }[],
+  originalPrice: null as number | null,
+  maxGroupSize: 10,
+};
 
 const difficultyColors: Record<string, string> = {
   easy:        'bg-emerald-100 text-emerald-700',
@@ -25,8 +36,10 @@ export default function ToursPage() {
   const [activeCategory, setActiveCategory] = useState<TourCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('popular');
-  const [maxPrice, setMaxPrice] = useState(2000);
+  const [maxPrice, setMaxPrice] = useState(500000);
   const [showFilters, setShowFilters] = useState(false);
+
+  const { data: toursData = [] } = useGetPublishedTours();
 
   const categoryTabs: { value: TourCategory | 'all'; label: string; disabled?: boolean }[] = [
     { value: 'all',     label: t('tours.tabs.all') },
@@ -48,26 +61,26 @@ export default function ToursPage() {
   }, []);
 
   const filtered = useMemo(() => {
-    let tours = detailedTours.filter((tour) => {
+    let list = toursData.filter((tour) => {
       const matchesCategory = activeCategory === 'all' || tour.category === activeCategory;
       const matchesSearch =
         !searchQuery ||
         tour.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tour.region.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tour.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        STATIC_TOUR_DEFAULTS.region.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        STATIC_TOUR_DEFAULTS.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesPrice = tour.price <= maxPrice;
       return matchesCategory && matchesSearch && matchesPrice;
     });
 
     switch (sortBy) {
-      case 'price-asc':  tours = [...tours].sort((a, b) => a.price - b.price); break;
-      case 'price-desc': tours = [...tours].sort((a, b) => b.price - a.price); break;
-      case 'rating':     tours = [...tours].sort((a, b) => b.rating - a.rating); break;
-      case 'duration':   tours = [...tours].sort((a, b) => (a.durationHours ?? (a.durationDays ?? 0) * 24) - (b.durationHours ?? (b.durationDays ?? 0) * 24)); break;
-      default:           tours = [...tours].sort((a, b) => b.reviewCount - a.reviewCount);
+      case 'price-asc':  list = [...list].sort((a, b) => a.price - b.price); break;
+      case 'price-desc': list = [...list].sort((a, b) => b.price - a.price); break;
+      case 'rating':     list = [...list].sort((a, b) => b.rating - a.rating); break;
+      case 'duration':   list = [...list].sort((a, b) => (a.durationHours ?? (a.durationDays ?? 0) * 24) - (b.durationHours ?? (b.durationDays ?? 0) * 24)); break;
+      default:           list = [...list].sort((a, b) => b.reviewCount - a.reviewCount);
     }
-    return tours;
-  }, [activeCategory, searchQuery, sortBy, maxPrice]);
+    return list;
+  }, [toursData, activeCategory, searchQuery, sortBy, maxPrice]);
 
   return (
     <div className="min-h-screen bg-cream">
@@ -171,13 +184,13 @@ export default function ToursPage() {
               <div className="flex flex-wrap items-center gap-6">
                 <div className="flex items-center gap-3">
                   <label className="text-sm font-semibold text-gray-600 whitespace-nowrap">
-                    {t('tours.maxPrice')}: <span className="text-brand-500">${maxPrice.toLocaleString()}</span>
+                    {t('tours.maxPrice')}: <span className="text-brand-500">{maxPrice.toLocaleString()} AMD</span>
                   </label>
                   <input
                     type="range"
-                    min={30}
-                    max={2000}
-                    step={10}
+                    min={10000}
+                    max={500000}
+                    step={5000}
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(Number(e.target.value))}
                     className="w-40 accent-brand-500"
@@ -222,7 +235,7 @@ export default function ToursPage() {
               <article key={tour.id} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-xl hover:shadow-gray-200/60 transition-all duration-300 hover:-translate-y-1.5">
                 <div className="relative h-52 overflow-hidden">
                   <img
-                    src={tour.image}
+                    src={tour.image ?? ''}
                     alt={tour.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
@@ -267,23 +280,23 @@ export default function ToursPage() {
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                       <MapPin className="w-3.5 h-3.5 text-brand-400 flex-shrink-0" />
-                      <span>{tour.region}</span>
+                      <span>{STATIC_TOUR_DEFAULTS.region}</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                       <Users className="w-3.5 h-3.5 text-brand-400 flex-shrink-0" />
-                      <span>{t('tours.maxPeople')} {tour.maxGroupSize} {t('tours.people')}</span>
+                      <span>{t('tours.maxPeople')} {STATIC_TOUR_DEFAULTS.maxGroupSize} {t('tours.people')}</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
                       <Calendar className="w-3.5 h-3.5 text-brand-400 flex-shrink-0" />
-                      <span>{tour.departures[0]?.days}</span>
+                      <span>{STATIC_TOUR_DEFAULTS.departures[0]?.days}</span>
                     </div>
                   </div>
 
-                  {tour.departures[0]?.times && (
+                  {STATIC_TOUR_DEFAULTS.departures[0]?.times && (
                     <div className="flex items-center gap-2 mb-4">
                       <span className="text-xs text-gray-400 font-medium">{t('tours.departures')}:</span>
                       <div className="flex gap-1.5 flex-wrap">
-                        {tour.departures[0].times.map((time) => (
+                        {STATIC_TOUR_DEFAULTS.departures[0].times.map((time) => (
                           <span key={time} className="px-2 py-0.5 bg-brand-50 text-brand-600 text-xs font-semibold rounded-full">
                             {time}
                           </span>
@@ -294,12 +307,12 @@ export default function ToursPage() {
 
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div>
-                      {tour.originalPrice && (
-                        <span className="text-xs text-gray-400 line-through block">${tour.originalPrice}</span>
+                      {STATIC_TOUR_DEFAULTS.originalPrice && (
+                        <span className="text-xs text-gray-400 line-through block">{STATIC_TOUR_DEFAULTS.originalPrice} AMD</span>
                       )}
                       <div className="flex items-baseline gap-1">
-                        <span className="text-gold-600 font-bold text-xl font-serif">${tour.price}</span>
-                        <span className="text-gray-400 text-xs">{t('tours.perPerson')}</span>
+                        <span className="text-gold-600 font-bold text-xl font-serif">{tour.price.toLocaleString()}</span>
+                        <span className="text-gray-400 text-xs">AMD / {t('tours.perPerson')}</span>
                       </div>
                     </div>
                     <Link
