@@ -2,7 +2,7 @@
 module.exports = {
 	siteUrl: "https://oscartour.am",
 	generateRobotsTxt: true,
-	exclude: ["/admin"],
+	exclude: ["/admin", "/admin/*", "/tours", "/tours/*"],
 	sitemapSize: 50000,
 	alternateRefs: [
 		{
