@@ -1,8 +1,8 @@
 export const seo = {
 	home: {
-		title: "FlowerFinderWeb - Premium Flower Delivery Service | Fresh Bouquets & Arrangements",
+		title: "OscarTour - Premium Tour Service | Exclusive Tours & Destinations",
 		description:
-			"Order beautiful fresh flowers online. Premium bouquets, custom arrangements, and same-day delivery. Perfect for any occasion - birthdays, anniversaries, and more.",
-		keywords: "flower delivery, fresh flowers, bouquets, floral arrangements, same day delivery, online florist",
+			"Book exclusive tours and experiences in Armenia. Customized itineraries, luxury transport, and expert guides. Perfect for any traveler.",
+		keywords: "tour service, exclusive tours, destinations, customized itineraries, luxury transport, expert guides",
 	},
 };

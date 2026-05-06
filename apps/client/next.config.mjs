@@ -14,7 +14,7 @@ const nextConfig = {
 	},
 	i18n: {
 		locales: ["en", "ru", "hy", "fr", "de"],
-		defaultLocale: "en",
+		defaultLocale: "hy",
 		localeDetection: true,
 	},
 	images: {

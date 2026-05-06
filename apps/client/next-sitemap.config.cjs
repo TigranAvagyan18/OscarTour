@@ -1,28 +1,32 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-	siteUrl: "https://flowerfinder.be",
+	siteUrl: "https://oscartour.am",
 	generateRobotsTxt: true,
-	exclude: ["/admin", "/shop/dashboard", "/courier/dashboard"],
+	exclude: ["/admin"],
 	sitemapSize: 50000,
 	alternateRefs: [
 		{
-			href: "https://flowerfinder.be",
-			hreflang: "nl-BE",
+			href: "https://oscartour.am",
+			hreflang: "hy-AM",
 		},
 		{
-			href: "https://flowerfinder.be/en",
+			href: "https://oscartour.am/en",
 			hreflang: "en-GB",
 		},
 		{
-			href: "https://flowerfinder.be/fr",
-			hreflang: "fr-BE",
+			href: "https://oscartour.am/ru",
+			hreflang: "ru-RU",
 		},
 		{
-			href: "https://flowerfinder.be/de",
-			hreflang: "de-BE",
+			href: "https://oscartour.am/fr",
+			hreflang: "fr-FR",
 		},
 		{
-			href: "https://flowerfinder.be",
+			href: "https://oscartour.am/de",
+			hreflang: "de-DE",
+		},
+		{
+			href: "https://oscartour.am",
 			hreflang: "x-default",
 		},
 	],
