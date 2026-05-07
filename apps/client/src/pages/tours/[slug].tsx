@@ -19,73 +19,199 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 
-// Fields not present in scraped data — same value for all tours
 const STATIC_DETAIL_DEFAULTS = {
-  region: 'Armenia',
-  startingPoint: 'Yerevan',
-  maxGroupSize: 10,
-  minGroupSize: 1,
-  languages: ['English', 'Russian'] as string[],
-  originalPrice: null as number | null,
-  departures: [
-    { days: 'Daily', times: ['09:00', '10:00', '14:00'] },
-  ] as { days: string; times: string[] }[],
-  highlights: [
-    'Garni Hellenistic Temple (1st century AD)',
-    'Symphony of Stones basalt gorge',
-    'Geghard UNESCO Monastery',
-    'Traditional lavash bread baking demonstration',
-    'Local honey, gata (pastry) and brandy tasting',
-  ] as string[],
-  included: [
-    'Professional licensed guide',
-    'Air-conditioned minibus',
-    'Hotel pickup and drop-off in Yerevan',
-    'Bottled water',
-  ] as string[],
-  excluded: [
-    'Entrance fees (paid on site)',
-    'Lunch (optional stop at roadside restaurant)',
-    'Personal shopping',
-    'Tips',
-  ] as string[],
-  itinerary: [
-    {
-      day: 1,
-      title: 'Departure & Drive',
-      description: 'Pickup from your hotel in Yerevan and drive toward the first destination along scenic mountain roads.',
-      stops: ['Yerevan Hotel Pickup'],
-      meals: [] as string[],
-    },
-    {
-      day: 1,
-      title: 'Main Sites',
-      description: 'Explore the key historical and cultural highlights of the day tour with your expert local guide.',
-      stops: ['Main Attraction', 'Secondary Viewpoint'],
-      meals: [] as string[],
-    },
-    {
-      day: 1,
-      title: 'Return to Yerevan',
-      description: 'Head back to Yerevan with panoramic views along the way. Drop-off at your hotel.',
-      stops: ['Scenic Viewpoint', 'Yerevan Drop-off'],
-      meals: [] as string[],
-    },
-  ] as { day: number; title: string; description: string; stops: string[]; meals: string[]; accommodation?: string }[],
-  faq: [
-    {
-      question: 'What is the minimum group size?',
-      answer: 'Tours operate with a minimum of 1 participant. Contact us to discuss private arrangements.',
-    },
-    {
-      question: 'Is hotel pickup included?',
-      answer: 'Yes, pickup is included from all hotels in central Yerevan. Please provide your hotel name when booking.',
-    },
-    {
-      question: 'Are children welcome?',
-      answer: 'Absolutely. Children under 5 join for free; ages 5–12 receive a 30% discount.',
-    },
-  ] as { question: string; answer: string }[],
+  en: {
+    region: 'Armenia',
+    startingPoint: 'Yerevan',
+    maxGroupSize: 10,
+    minGroupSize: 1,
+    languages: ['English', 'Russian'],
+    originalPrice: null as number | null,
+    departures: [{ days: 'Daily', times: ['09:00', '10:00', '14:00'] }],
+    highlights: [
+      'Garni Hellenistic Temple (1st century AD)',
+      'Symphony of Stones basalt gorge',
+      'Geghard UNESCO Monastery',
+      'Traditional lavash bread baking demonstration',
+      'Local honey, gata (pastry) and brandy tasting',
+    ],
+    included: [
+      'Armenian hospitality treat',
+      'Air-conditioned minibus',
+      'Hotel pickup and drop-off in Yerevan',
+    ],
+    excluded: [
+      'Entrance fees (paid on site)',
+      'Lunch (optional stop at roadside restaurant)',
+      'Personal shopping',
+      'Tips',
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: 'Departure & Drive',
+        description: 'Pickup from your hotel in Yerevan and drive toward the first destination along scenic mountain roads.',
+        stops: ['Yerevan Hotel Pickup'],
+        meals: [] as string[],
+      },
+      {
+        day: 1,
+        title: 'Main Sites',
+        description: 'Explore the key historical and cultural highlights of the day tour with your expert local guide.',
+        stops: ['Main Attraction', 'Secondary Viewpoint'],
+        meals: [] as string[],
+      },
+      {
+        day: 1,
+        title: 'Return to Yerevan',
+        description: 'Head back to Yerevan with panoramic views along the way. Drop-off at your hotel.',
+        stops: ['Scenic Viewpoint', 'Yerevan Drop-off'],
+        meals: [] as string[],
+      },
+    ] as { day: number; title: string; description: string; stops: string[]; meals: string[]; accommodation?: string }[],
+    faq: [
+      {
+        question: 'What is the minimum group size?',
+        answer: 'Tours operate with a minimum of 1 participant. Contact us to discuss private arrangements.',
+      },
+      {
+        question: 'Is hotel pickup included?',
+        answer: 'Yes, pickup is included from all hotels in central Yerevan. Please provide your hotel name when booking.',
+      },
+      {
+        question: 'Are children welcome?',
+        answer: 'Absolutely. Children under 5 join for free; ages 5–12 receive a 30% discount.',
+      },
+    ] as { question: string; answer: string }[],
+  },
+  ru: {
+    region: 'Армения',
+    startingPoint: 'Ереван',
+    maxGroupSize: 10,
+    minGroupSize: 1,
+    languages: ['Английский', 'Русский'],
+    originalPrice: null as number | null,
+    departures: [{ days: 'Ежедневно', times: ['09:00', '10:00', '14:00'] }],
+    highlights: [
+      'Эллинистический храм Гарни (I в. н.э.)',
+      'Базальтовое ущелье «Симфония камней»',
+      'Монастырь Гегард под охраной ЮНЕСКО',
+      'Мастер-класс по выпечке традиционного лаваша',
+      'Дегустация местного мёда, гаты и коньяка',
+    ],
+    included: [
+      'Угощение по армянски',
+      'Автобус с кондиционером',
+      'Трансфер из/в отель в Ереване',
+    ],
+    excluded: [
+      'Входные билеты (оплата на месте)',
+      'Обед (по желанию в придорожном ресторане)',
+      'Личные покупки',
+      'Чаевые',
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: 'Отправление и дорога',
+        description: 'Трансфер из вашего отеля в Ереване и поездка к первой достопримечательности по живописным горным дорогам.',
+        stops: ['Отправление из отеля в Ереване'],
+        meals: [] as string[],
+      },
+      {
+        day: 1,
+        title: 'Основные объекты',
+        description: 'Изучите ключевые исторические и культурные достопримечательности дневного тура с местным гидом.',
+        stops: ['Главная достопримечательность', 'Смотровая площадка'],
+        meals: [] as string[],
+      },
+      {
+        day: 1,
+        title: 'Возвращение в Ереван',
+        description: 'Возвращение в Ереван с панорамными видами по пути. Трансфер в ваш отель.',
+        stops: ['Живописная смотровая площадка', 'Прибытие в Ереван'],
+        meals: [] as string[],
+      },
+    ] as { day: number; title: string; description: string; stops: string[]; meals: string[]; accommodation?: string }[],
+    faq: [
+      {
+        question: 'Каков минимальный размер группы?',
+        answer: 'Туры проводятся от 1 участника. Свяжитесь с нами для обсуждения индивидуальных условий.',
+      },
+      {
+        question: 'Включён ли трансфер из отеля?',
+        answer: 'Да, трансфер включён из всех отелей центра Еревана. Укажите название отеля при бронировании.',
+      },
+      {
+        question: 'Можно ли с детьми?',
+        answer: 'Конечно. Дети до 5 лет — бесплатно; возраст 5–12 лет — скидка 30%.',
+      },
+    ] as { question: string; answer: string }[],
+  },
+  hy: {
+    region: 'Հայաստան',
+    startingPoint: 'Երևան',
+    maxGroupSize: 10,
+    minGroupSize: 1,
+    languages: ['Անգլերեն', 'Ռուսերեն'],
+    originalPrice: null as number | null,
+    departures: [{ days: 'Ամեն օր', times: ['09:00', '10:00', '14:00'] }],
+    highlights: [
+      'Գառնիի հելլենիստական տաճար (մ.թ. 1-ին դ.)',
+      'Քարերի սիմֆոնիա բազալտե կիրճ',
+      'ՅՈՒՆԵՍԿՕ-ի ժառանգություն՝ Գեղարդ վանք',
+      'Ավանդական լավաշ թխելու ցուցադրություն',
+      'Տեղական մեղր, գաթա և կոնյակ համտեսում',
+    ],
+    included: [
+      'Հայկական հյուրասիրություն',
+      'Կոնդիցիոներով մինիբուս',
+      'Հյուրանոցից/հյուրանոց տեղափոխություն Երևանում',
+    ],
+    excluded: [
+      'Մուտքի վճարներ (վճարվում են տեղում)',
+      'Ճաշ (ըստ ցանկության ճանապարհային ռեստորանում)',
+      'Անձնական գնումներ',
+      'Թիփ',
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: 'Մեկնում և ճանապարհ',
+        description: 'Ձեր հյուրանոցից Երևանում ուղևորություն դեպի առաջին վայր՝ գեղատեսիլ լեռնային ճանապարհներով։',
+        stops: ['Մեկնում Երևանի հյուրանոցից'],
+        meals: [] as string[],
+      },
+      {
+        day: 1,
+        title: 'Հիմնական վայրեր',
+        description: 'Հետազոտեք օրվա շրջայցի հիմնական պատմական և մշակութային կետերը տեղական փորձառու ուղեկցի հետ։',
+        stops: ['Հիմնական տեսարժան վայր', 'Երկրորդական դիտակետ'],
+        meals: [] as string[],
+      },
+      {
+        day: 1,
+        title: 'Վերադարձ Երևան',
+        description: 'Վերադարձ Երևան՝ ճանապարհին վայելելով պանորամային տեսարաններ։ Հասցում ձեր հյուրանոց։',
+        stops: ['Գեղատեսիլ դիտակետ', 'Ժամանում Երևան'],
+        meals: [] as string[],
+      },
+    ] as { day: number; title: string; description: string; stops: string[]; meals: string[]; accommodation?: string }[],
+    faq: [
+      {
+        question: 'Ո՞րն է խմբի նվազագույն չափը։',
+        answer: 'Շրջայցերն անցկացվում են նվազագույնը 1 մասնակցի դեպքում։ Կապ հաստատեք անհատական պայմանների համար։',
+      },
+      {
+        question: 'Ներառվա՞ծ է հյուրանոցից տեղափոխությունը։',
+        answer: 'Այո, տեղափոխությունը ներառված է Երևանի կենտրոնի բոլոր հյուրանոցներից։ Ամրագրելիս նշեք հյուրանոցի անունը։',
+      },
+      {
+        question: 'Երեխաների հետ կարելի՞ է։',
+        answer: 'Անպայման։ 5 տարեկանից փոքր երեխաները՝ անվճար; 5–12 տարեկան՝ 30% զեղչ։',
+      },
+    ] as { question: string; answer: string }[],
+  },
 };
 
 const tabKeys = ['overview', 'itinerary', 'included', 'reviews', 'faq'] as const;
@@ -100,7 +226,8 @@ const difficultyColors: Record<string, string> = {
 export default function TourDetailPage() {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const details = STATIC_DETAIL_DEFAULTS[language as keyof typeof STATIC_DETAIL_DEFAULTS] ?? STATIC_DETAIL_DEFAULTS.en;
 
   const { data: tour, isLoading } = useGetTourBySlug(slug ?? '', {
     query: { enabled: !!slug },
@@ -222,15 +349,15 @@ export default function TourDetailPage() {
           </span>
           <span className="flex items-center gap-1.5">
             <MapPin className="w-4 h-4 text-brand-400" />
-            {STATIC_DETAIL_DEFAULTS.region}
+            {details.region}
           </span>
           <span className="flex items-center gap-1.5">
             <Users className="w-4 h-4 text-brand-400" />
-            Max {STATIC_DETAIL_DEFAULTS.maxGroupSize}
+            Max {details.maxGroupSize}
           </span>
           <span className="flex items-center gap-1.5">
             <Globe className="w-4 h-4 text-brand-400" />
-            {STATIC_DETAIL_DEFAULTS.languages.join(', ')}
+            {details.languages.join(', ')}
           </span>
         </div>
       </div>
@@ -312,7 +439,7 @@ export default function TourDetailPage() {
 
               <h3 className="text-lg font-serif font-bold text-dark mb-4">{t('tour.overview.highlights')}</h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {STATIC_DETAIL_DEFAULTS.highlights.map((h) => (
+                {details.highlights.map((h) => (
                   <li key={h} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100">
                     <div className="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <CheckCircle className="w-3.5 h-3.5 text-brand-500" />
@@ -325,9 +452,9 @@ export default function TourDetailPage() {
               <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
                   { icon: Clock,  label: t('tour.overview.duration'),  value: tour.duration },
-                  { icon: MapPin, label: t('tour.overview.startsAt'),  value: STATIC_DETAIL_DEFAULTS.startingPoint },
-                  { icon: Users,  label: t('tour.overview.groupSize'), value: `${STATIC_DETAIL_DEFAULTS.minGroupSize}–${STATIC_DETAIL_DEFAULTS.maxGroupSize}` },
-                  { icon: Globe,  label: t('tour.overview.language'),  value: STATIC_DETAIL_DEFAULTS.languages[0] + (STATIC_DETAIL_DEFAULTS.languages.length > 1 ? ` +${STATIC_DETAIL_DEFAULTS.languages.length - 1}` : '') },
+                  { icon: MapPin, label: t('tour.overview.startsAt'),  value: details.startingPoint },
+                  { icon: Users,  label: t('tour.overview.groupSize'), value: `${details.minGroupSize}–${details.maxGroupSize}` },
+                  { icon: Globe,  label: t('tour.overview.language'),  value: details.languages[0] + (details.languages.length > 1 ? ` +${details.languages.length - 1}` : '') },
                 ].map(({ icon: Icon, label, value }) => (
                   <div key={label} className="bg-white rounded-2xl p-4 border border-gray-100 text-center">
                     <Icon className="w-5 h-5 text-brand-400 mx-auto mb-2" />
@@ -337,11 +464,11 @@ export default function TourDetailPage() {
                 ))}
               </div>
 
-              {STATIC_DETAIL_DEFAULTS.departures.length > 0 && (
+              {details.departures.length > 0 && (
                 <div className="mt-8">
                   <h3 className="text-lg font-serif font-bold text-dark mb-4">{t('tour.overview.departureSchedule')}</h3>
                   <div className="space-y-3">
-                    {STATIC_DETAIL_DEFAULTS.departures.map((dep, i) => (
+                    {details.departures.map((dep, i) => (
                       <div key={i} className="bg-white rounded-2xl p-4 border border-gray-100 flex flex-wrap items-center gap-4">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4 text-brand-400" />
@@ -369,7 +496,7 @@ export default function TourDetailPage() {
                   : t('tour.itinerary.tourItinerary')}
               </h2>
               <div className="space-y-3">
-                {STATIC_DETAIL_DEFAULTS.itinerary.map((item, idx) => (
+                {details.itinerary.map((item, idx) => (
                   <div key={idx} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
                     <button
                       onClick={() => setOpenItinerary(openItinerary === idx ? null : idx)}
@@ -451,7 +578,7 @@ export default function TourDetailPage() {
                     <h3 className="font-semibold text-dark">{t('tour.included.included')}</h3>
                   </div>
                   <ul className="space-y-2.5">
-                    {STATIC_DETAIL_DEFAULTS.included.map((item) => (
+                    {details.included.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-gray-600">
                         <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                         {item}
@@ -467,7 +594,7 @@ export default function TourDetailPage() {
                     <h3 className="font-semibold text-dark">{t('tour.included.notIncluded')}</h3>
                   </div>
                   <ul className="space-y-2.5">
-                    {STATIC_DETAIL_DEFAULTS.excluded.map((item) => (
+                    {details.excluded.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-gray-600">
                         <XCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
                         {item}
@@ -517,7 +644,7 @@ export default function TourDetailPage() {
             <section id="tab-faq" aria-label="FAQ">
               <h2 className="text-2xl font-serif font-bold text-dark mb-6">{t('tour.faqSection.title')}</h2>
               <div className="space-y-3">
-                {STATIC_DETAIL_DEFAULTS.faq.map((item, i) => (
+                {details.faq.map((item, i) => (
                   <div key={i} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
                     <button
                       onClick={() => setOpenFaq(openFaq === i ? null : i)}
