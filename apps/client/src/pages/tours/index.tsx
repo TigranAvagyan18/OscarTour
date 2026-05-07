@@ -35,7 +35,7 @@ export default function ToursPage() {
   const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<TourCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('popular');
+  const [sortBy, setSortBy] = useState('price-desc');
   const [maxPrice, setMaxPrice] = useState(500000);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -232,7 +232,7 @@ export default function ToursPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {filtered.map((tour) => (
-              <article key={tour.id} className="group bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-xl hover:shadow-gray-200/60 transition-all duration-300 hover:-translate-y-1.5">
+              <Link key={tour.id} href={`/tours/${tour.slug}`} className="group block bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-xl hover:shadow-gray-200/60 transition-all duration-300 hover:-translate-y-1.5">
                 <div className="relative h-52 overflow-hidden">
                   <img
                     src={tour.image ?? ''}
@@ -324,7 +324,7 @@ export default function ToursPage() {
                     </Link>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         )}
