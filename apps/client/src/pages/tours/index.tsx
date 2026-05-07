@@ -35,7 +35,7 @@ export default function ToursPage() {
   const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<TourCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('price-desc');
+  const [sortBy, setSortBy] = useState('price-asc');
   const [maxPrice, setMaxPrice] = useState(500000);
   const [showFilters, setShowFilters] = useState(false);
 
