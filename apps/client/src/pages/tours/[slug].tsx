@@ -453,7 +453,7 @@ export default function TourDetailPage() {
                 {[
                   { icon: Clock,  label: t('tour.overview.duration'),  value: tour.duration },
                   { icon: MapPin, label: t('tour.overview.startsAt'),  value: details.startingPoint },
-                  { icon: Users,  label: t('tour.overview.groupSize'), value: `${details.minGroupSize}–${details.maxGroupSize}` },
+                  { icon: Users,  label: t('tour.overview.groupSize'), value: `${1}–${4}` },
                   { icon: Globe,  label: t('tour.overview.language'),  value: details.languages[0] + (details.languages.length > 1 ? ` +${details.languages.length - 1}` : '') },
                 ].map(({ icon: Icon, label, value }) => (
                   <div key={label} className="bg-white rounded-2xl p-4 border border-gray-100 text-center">
