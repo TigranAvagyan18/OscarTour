@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Clock, MapPin, Star, ArrowRight, ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
-import { tourPackages } from '../data/mockData';
+import Link from 'next/link';
+import { useGetPublishedTours } from '@/generated';
 import { useTranslation } from '@/providers/TranslationProvider';
 
 const categoryColors: Record<string, string> = {
@@ -22,6 +23,7 @@ const itemVariants = {
 
 export default function TourPackages() {
   const { t } = useTranslation();
+  const { data: tours } = useGetPublishedTours();
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-10%' });
@@ -102,9 +104,9 @@ export default function TourPackages() {
             variants={itemVariants}
             className="flex gap-5 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4"
           >
-            {tourPackages.map((pkg) => (
+            {(tours ?? []).map((tour) => (
               <motion.article
-                key={pkg.id}
+                key={tour.id}
                 whileHover="hover"
                 className="flex-none w-80 bg-white/5 border border-white/10 rounded-3xl overflow-hidden group"
               >
@@ -115,8 +117,8 @@ export default function TourPackages() {
                 >
                   <div className="relative h-48 overflow-hidden">
                     <motion.img
-                      src={pkg.image}
-                      alt={pkg.title}
+                      src={tour.image ?? ''}
+                      alt={tour.title}
                       className="w-full h-full object-cover"
                       loading="lazy"
                       variants={{ hover: { scale: 1.1 } }}
@@ -124,40 +126,42 @@ export default function TourPackages() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
                     <div className="absolute top-4 left-4 flex gap-2">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[pkg.category]}`}>
-                        {t(`tourPackages.categories.${pkg.category}`)}
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[tour.category]}`}>
+                        {t(`home.tourPackages.categories.${tour.category}`)}
                       </span>
-                      {pkg.badge && (
+                      {tour.badge && (
                         <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gold-500 text-white">
-                          {pkg.badge}
+                          {tour.badge}
                         </span>
                       )}
                     </div>
                     <div className="absolute bottom-4 right-4 flex items-center gap-1 bg-dark/70 backdrop-blur-sm rounded-full px-2.5 py-1">
                       <Star className="w-3.5 h-3.5 text-gold-400 fill-gold-400" />
-                      <span className="text-white text-xs font-semibold">{pkg.rating}</span>
-                      <span className="text-white/50 text-xs">({pkg.reviewCount})</span>
+                      <span className="text-white text-xs font-semibold">{tour.rating}</span>
+                      <span className="text-white/50 text-xs">({tour.reviewCount})</span>
                     </div>
                   </div>
 
                   <div className="p-5">
-                    <h3 className="font-serif font-bold text-white text-lg mb-3 leading-tight group-hover:text-gold-200 transition-colors">
-                      {pkg.title}
+                    <h3 className="font-serif font-bold text-white text-lg mb-3 leading-tight group-hover:text-gold-200 transition-colors line-clamp-2">
+                      {tour.title}
                     </h3>
 
                     <div className="flex items-center gap-4 mb-4 text-sm text-white/50">
                       <span className="flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5" />
-                        {pkg.duration}
+                        {tour.duration}
                       </span>
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5" />
-                        {pkg.startingPoint}
-                      </span>
+                      {tour.startingPoint && (
+                        <span className="flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5" />
+                          {tour.startingPoint}
+                        </span>
+                      )}
                     </div>
 
                     <ul className="space-y-1.5 mb-5">
-                      {pkg.highlights.slice(0, 3).map((h) => (
+                      {tour.highlights.slice(0, 3).map((h) => (
                         <li key={h} className="flex items-center gap-2 text-xs text-white/60">
                           <CheckCircle className="w-3.5 h-3.5 text-brand-400 flex-shrink-0" />
                           {h}
@@ -167,19 +171,22 @@ export default function TourPackages() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-white/10">
                       <div>
+                        {tour.originalPrice && (
+                          <span className="text-white/30 text-xs line-through block">{tour.originalPrice.toLocaleString()}</span>
+                        )}
                         <span className="text-white/40 text-xs">{t('home.tourPackages.from')}</span>
                         <div className="text-gold-400 font-bold text-xl font-serif">
-                          ${pkg.price.toLocaleString()}
+                          {tour.price.toLocaleString()}
                         </div>
                         <span className="text-white/30 text-xs">{t('home.tourPackages.perPerson')}</span>
                       </div>
-                      <button
-                        onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                      <Link
+                        href={`/tours/${tour.slug}`}
                         className="flex items-center gap-2 bg-brand-500 hover:bg-brand-400 text-white font-semibold text-sm px-4 py-2.5 rounded-full transition-colors hover:shadow-lg hover:shadow-brand-500/30"
                       >
                         {t('home.tourPackages.bookNow')}
                         <ArrowRight className="w-4 h-4" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>
