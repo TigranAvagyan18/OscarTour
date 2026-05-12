@@ -36,9 +36,9 @@ export default function ContactSection() {
   };
 
   const contactItems = [
-    { icon: Phone, label: t('home.contact.call'), value: '+374 10 123 456', sub: t('home.contact.callSub') },
-    { icon: Mail, label: t('home.contact.email'), value: 'hello@armeniatours.am', sub: t('home.contact.emailSub') },
-    { icon: MessageCircle, label: t('home.contact.whatsapp'), value: '+374 98 765 432', sub: t('home.contact.whatsappSub') },
+    { icon: Phone, label: t('home.contact.call'), value: '+374 55 077 010', sub: t('home.contact.callSub') },
+    { icon: Mail, label: t('home.contact.email'), value: 'oscartour.am@gmail.com', sub: t('home.contact.emailSub') },
+    { icon: MessageCircle, label: t('home.contact.whatsapp'), value: '+374 55 077 010', sub: t('home.contact.whatsappSub') },
   ];
 
   return (

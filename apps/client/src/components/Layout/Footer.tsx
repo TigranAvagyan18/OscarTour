@@ -65,9 +65,8 @@ export default function Footer() {
 
             <address className="not-italic space-y-3 mb-8">
               {[
-                { icon: MapPin, text: '15 Northern Avenue, Yerevan 0001, Armenia' },
-                { icon: Phone, text: '+374 10 123 456' },
-                { icon: Mail, text: 'hello@armeniatours.am' },
+                { icon: Phone, text: '+374 55 077 010' },
+                { icon: Mail, text: 'oscartour.am@gmail.com' },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-start gap-3 text-sm text-white/50 hover:text-white/80 transition-colors">
                   <Icon className="w-4 h-4 text-gold-500 flex-shrink-0 mt-0.5" />
