@@ -610,7 +610,7 @@ export default function TourDetailPage() {
               <div className="bg-white rounded-2xl p-6 border border-gray-100 mb-6">
                 <div className="flex flex-wrap items-center gap-6">
                   <div className="text-center">
-                    <div className="text-5xl font-serif font-bold text-dark mb-1">{tour.rating}</div>
+                    <div className="text-5xl font-bold text-dark mb-1">{tour.rating}</div>
                     <div className="flex items-center justify-center gap-0.5 mb-1">
                       {[1,2,3,4,5].map((i) => (
                         <Star key={i} className={`w-4 h-4 ${i <= Math.round(tour.rating) ? 'text-gold-400 fill-gold-400' : 'text-gray-200'}`} />

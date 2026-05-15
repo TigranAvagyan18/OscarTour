@@ -77,10 +77,19 @@
 
 body[data-scroll-locked][data-scroll-locked] {
 	margin-right: 0 !important;
+  overflow-y: scroll !important;
 }
 
 html {
 	scroll-behavior: smooth;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  padding-right: var(--radix-scrollbar-width);
 }
 
 @layer utilities {

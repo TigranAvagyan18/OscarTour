@@ -1,8 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import {
-  Search, Clock, MapPin, Star, ArrowRight, Users, Filter,
-  ChevronDown, X, Calendar, Sparkles,
+  Search, Clock, MapPin, Star, ArrowRight, Users, Filter, X, Calendar, Sparkles
 } from 'lucide-react';
 import { useGetPublishedTours } from '@/generated/index';
 import { useTranslation } from '@/providers/TranslationProvider';
