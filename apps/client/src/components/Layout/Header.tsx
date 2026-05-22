@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Map } from 'lucide-react';
 import ReactCountryFlag from 'react-country-flag';
 import { useTranslation } from '@/providers/TranslationProvider';
@@ -13,6 +13,7 @@ export default function Header() {
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   const activeLang = languages.find((l) => l.code === language) || languages[0];
   const isHomePage = router.pathname === '/';
@@ -34,6 +35,23 @@ export default function Header() {
   useEffect(() => {
     setMobileOpen(false);
   }, [router.pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [mobileOpen]);
 
   const isTransparent = isHomePage && !scrolled;
 
@@ -66,6 +84,7 @@ export default function Header() {
 
   return (
     <header
+      ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isTransparent
           ? 'bg-transparent'
