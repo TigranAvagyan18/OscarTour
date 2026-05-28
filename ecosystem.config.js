@@ -4,8 +4,8 @@ module.exports = {
 			name: 'server',
 			script: './apps/server/dist/main.js',
 			watch: false,
-			exec_mode: 'cluster',
-			instances: 6,
+			exec_mode: 'fork',
+			instances: 1,
 			autorestart: true
 		},
 		{
