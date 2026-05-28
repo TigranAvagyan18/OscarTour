@@ -435,7 +435,7 @@ export default function TourDetailPage() {
         <div className="max-w-4xl space-y-14">
             <section id="tab-overview" aria-label="Overview">
               <h2 className="text-2xl font-serif font-bold text-dark mb-4">{t('tour.tabs.overview')}</h2>
-              <p className="text-gray-600 leading-relaxed mb-8">{tour.fullDescription}</p>
+              <p className="text-gray-600 leading-relaxed mb-8">{tour.description[language]}</p>
 
               <h3 className="text-lg font-serif font-bold text-dark mb-4">{t('tour.overview.highlights')}</h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">

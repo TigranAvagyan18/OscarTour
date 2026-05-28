@@ -11,6 +11,12 @@ import {
 export type TourCategory = 'group' | 'private' | 'package';
 export type TourDifficulty = 'easy' | 'moderate' | 'challenging';
 
+export interface TourDescription {
+	en: string;
+	ru: string;
+	hy: string;
+}
+
 export interface DepartureSchedule {
 	days: string;
 	times: string[];
@@ -45,12 +51,8 @@ export class Tour extends BaseEntity {
 	title: string;
 
 	@ApiProperty()
-	@Column({ type: 'text' })
-	shortDescription: string;
-
-	@ApiProperty()
-	@Column({ type: 'text' })
-	fullDescription: string;
+	@Column({ type: 'jsonb' })
+	description: TourDescription;
 
 	@ApiProperty({ enum: ['group', 'private', 'package'] })
 	@Column()

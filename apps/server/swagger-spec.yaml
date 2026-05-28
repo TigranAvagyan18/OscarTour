@@ -375,10 +375,8 @@ components:
           type: string
         title:
           type: string
-        shortDescription:
-          type: string
-        fullDescription:
-          type: string
+        description:
+          type: object
         category:
           type: string
           enum:
@@ -478,8 +476,7 @@ components:
         - id
         - slug
         - title
-        - shortDescription
-        - fullDescription
+        - description
         - category
         - duration
         - durationHours

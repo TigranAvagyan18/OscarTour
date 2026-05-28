@@ -31,7 +31,7 @@ const categoryColors: Record<string, string> = {
 };
 
 export default function ToursPage() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<TourCategory | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('price-asc');
@@ -269,7 +269,7 @@ export default function ToursPage() {
                     {tour.title}
                   </h2>
                   <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">
-                    {tour.shortDescription}
+                    {tour.description[language]}
                   </p>
 
                   <div className="grid grid-cols-2 gap-2 mb-4">
