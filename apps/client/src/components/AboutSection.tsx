@@ -80,7 +80,7 @@ export default function AboutSection() {
               className="relative z-10 rounded-3xl overflow-hidden aspect-[4/5] max-w-md"
             >
               <img
-                src="https://images.pexels.com/photos/2325446/pexels-photo-2325446.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src="/assets/ararat.webp"
                 alt="Geghard Monastery"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -116,8 +116,8 @@ export default function AboutSection() {
               className="absolute -top-4 -right-4 lg:right-2 z-10 w-40 h-40 rounded-3xl overflow-hidden border-4 border-white shadow-lg"
             >
               <img
-                src="https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=300"
-                alt="Garni Temple"
+                src="/assets/jermuk.webp"
+                alt="Jermuk"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />

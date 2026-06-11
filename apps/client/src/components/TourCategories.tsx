@@ -6,15 +6,15 @@ import { useTranslation } from '@/providers/TranslationProvider';
 import { translations } from '@/i18n';
 
 const categoryImages = [
-  'https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg?auto=compress&cs=tinysrgb&w=600',
-  'https://images.pexels.com/photos/4609034/pexels-photo-4609034.jpeg?auto=compress&cs=tinysrgb&w=600',
+  '/assets/group-tours.jpg',
+  '/assets/private-tours.jpg',
   'https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&w=600',
 ];
 
 const categoryIcons = [Users, User, Package];
-const categoryColors = ['brand', 'gold', 'brand'];
+const categoryColors = ['gold', 'gold', 'brand'];
 const categoryKeys = ['group', 'private', 'package'] as const;
-const disabledKeys = new Set(['group', 'package']);
+const disabledKeys = new Set(['package']);
 
 const containerVariants = {
   hidden: {},
