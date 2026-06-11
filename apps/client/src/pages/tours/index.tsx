@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { useGetPublishedTours } from '@/generated/index';
 import { useTranslation } from '@/providers/TranslationProvider';
+import { groupTours } from '@/data/groupToursData';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type TourCategory = 'group' | 'private' | 'package';
@@ -40,9 +41,31 @@ export default function ToursPage() {
 
   const { data: toursData = [] } = useGetPublishedTours();
 
+  const lang = (language === 'en' || language === 'ru' || language === 'hy') ? language : 'en';
+
+  const allTours = useMemo(() => {
+    const mockGroupTours = groupTours.map((gt) => ({
+      id: gt.id,
+      slug: gt.slug,
+      title: gt[lang].title,
+      description: { en: gt.en.shortDescription, ru: gt.ru.shortDescription, hy: gt.hy.shortDescription },
+      category: gt.category as TourCategory,
+      duration: gt.duration,
+      durationHours: gt.durationHours,
+      price: gt.price,
+      image: gt.image,
+      gallery: gt.gallery,
+      rating: gt.rating,
+      reviewCount: gt.reviewCount,
+      badge: gt.badge ?? null,
+      difficulty: 'easy' as const,
+    }));
+    return [...toursData, ...mockGroupTours];
+  }, [toursData, lang]);
+
   const categoryTabs: { value: TourCategory | 'all'; label: string; disabled?: boolean }[] = [
     { value: 'all',     label: t('tours.tabs.all') },
-    { value: 'group',   label: t('tours.tabs.group'),   disabled: true },
+    { value: 'group',   label: t('tours.tabs.group') },
     { value: 'private', label: t('tours.tabs.private') },
     { value: 'package', label: t('tours.tabs.package'), disabled: true },
   ];
@@ -60,7 +83,7 @@ export default function ToursPage() {
   }, []);
 
   const filtered = useMemo(() => {
-    let list = toursData.filter((tour) => {
+    let list = allTours.filter((tour) => {
       const matchesCategory = activeCategory === 'all' || tour.category === activeCategory;
       const matchesSearch =
         !searchQuery ||
@@ -79,7 +102,7 @@ export default function ToursPage() {
       default:           list = [...list].sort((a, b) => b.reviewCount - a.reviewCount);
     }
     return list;
-  }, [toursData, activeCategory, searchQuery, sortBy, maxPrice]);
+  }, [allTours, activeCategory, searchQuery, sortBy, maxPrice]);
 
   return (
     <div className="min-h-screen bg-cream">

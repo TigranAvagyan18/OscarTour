@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { useGetTourBySlug } from '@/generated/index';
 import { useTranslation } from '@/providers/TranslationProvider';
+import { getGroupTourBySlug } from '@/data/groupToursData';
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -227,11 +228,38 @@ export default function TourDetailPage() {
   const router = useRouter();
   const { slug } = router.query as { slug: string };
   const { t, language } = useTranslation();
-  const details = STATIC_DETAIL_DEFAULTS[language as keyof typeof STATIC_DETAIL_DEFAULTS] ?? STATIC_DETAIL_DEFAULTS.en;
 
-  const { data: tour, isLoading } = useGetTourBySlug(slug ?? '', {
-    query: { enabled: !!slug },
+  const mockGroupTour = slug ? getGroupTourBySlug(slug) : undefined;
+  const lang = (language === 'en' || language === 'ru' || language === 'hy') ? language : 'en';
+  const mockLocale = mockGroupTour ? (mockGroupTour[lang] ?? mockGroupTour.en) : undefined;
+
+  const details = mockLocale
+    ? { ...mockLocale, maxGroupSize: mockGroupTour!.maxGroupSize, minGroupSize: mockGroupTour!.minGroupSize, originalPrice: null as number | null }
+    : (STATIC_DETAIL_DEFAULTS[language as keyof typeof STATIC_DETAIL_DEFAULTS] ?? STATIC_DETAIL_DEFAULTS.en);
+
+  const { data: apiTour, isLoading } = useGetTourBySlug(slug ?? '', {
+    query: { enabled: !!slug && !mockGroupTour },
   });
+
+  const tour = apiTour ?? (mockGroupTour && mockLocale ? {
+    id: mockGroupTour.id,
+    slug: mockGroupTour.slug,
+    title: mockLocale.title,
+    shortDescription: mockLocale.shortDescription,
+    description: mockLocale.fullDescription,
+    category: mockGroupTour.category,
+    difficulty: 'easy' as const,
+    duration: mockGroupTour.duration,
+    durationHours: mockGroupTour.durationHours,
+    price: mockGroupTour.price,
+    image: mockGroupTour.image,
+    gallery: mockGroupTour.gallery,
+    rating: mockGroupTour.rating,
+    reviewCount: mockGroupTour.reviewCount,
+    badge: mockGroupTour.badge ?? null,
+    isPublished: true,
+    tags: [] as string[],
+  } : null);
 
   const [activeTab, setActiveTab] = useState<TabKey>('overview');
   const [activeImage, setActiveImage] = useState(0);
@@ -261,7 +289,7 @@ export default function TourDetailPage() {
     mainApi?.scrollTo(index);
   };
 
-  if (!slug || isLoading) return null;
+  if (!slug || (isLoading && !mockGroupTour)) return null;
 
   if (!tour) {
     return (
@@ -435,7 +463,7 @@ export default function TourDetailPage() {
         <div className="max-w-4xl space-y-14">
             <section id="tab-overview" aria-label="Overview">
               <h2 className="text-2xl font-serif font-bold text-dark mb-4">{t('tour.tabs.overview')}</h2>
-              <p className="text-gray-600 leading-relaxed mb-8">{tour.description[language]}</p>
+              <p className="text-gray-600 leading-relaxed mb-8">{typeof tour.description === 'string' ? tour.description : tour.description[language]}</p>
 
               <h3 className="text-lg font-serif font-bold text-dark mb-4">{t('tour.overview.highlights')}</h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -453,7 +481,7 @@ export default function TourDetailPage() {
                 {[
                   { icon: Clock,  label: t('tour.overview.duration'),  value: tour.duration },
                   { icon: MapPin, label: t('tour.overview.startsAt'),  value: details.startingPoint },
-                  { icon: Users,  label: t('tour.overview.groupSize'), value: `${1}–${4}` },
+                  { icon: Users,  label: t('tour.overview.groupSize'), value: `${details.minGroupSize}–${details.maxGroupSize}` },
                   { icon: Globe,  label: t('tour.overview.language'),  value: details.languages[0] + (details.languages.length > 1 ? ` +${details.languages.length - 1}` : '') },
                 ].map(({ icon: Icon, label, value }) => (
                   <div key={label} className="bg-white rounded-2xl p-4 border border-gray-100 text-center">
