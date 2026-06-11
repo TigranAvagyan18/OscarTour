@@ -125,47 +125,21 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-4">
-            <h3 className="font-serif font-semibold text-white text-base mb-2">{t('common.footer.stayInspired')}</h3>
-            <p className="text-white/50 text-sm mb-5">
-              {t('common.footer.newsletter')}
-            </p>
-
-            {subscribed ? (
-              <div className="bg-brand-500/20 border border-brand-500/30 rounded-2xl p-4 text-sm text-brand-200">
-                {t('common.footer.subscribed')}
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  required
-                  className="flex-1 bg-white/8 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30
-                             focus:outline-none focus:border-brand-400 focus:bg-white/12 transition-all"
-                />
-                <button
-                  type="submit"
-                  className="w-12 h-12 rounded-xl bg-gold-500 hover:bg-gold-400 flex items-center justify-center flex-shrink-0 transition-colors"
-                  aria-label="Subscribe"
-                >
-                  <Send className="w-4 h-4 text-white" />
-                </button>
-              </form>
-            )}
-
-            <div className="mt-8">
+            <div>
               <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">{t('common.footer.paymentMethods')}</p>
               <div className="flex items-center gap-3 flex-wrap">
-                {['VISA', 'MC', 'AMEX', 'PayPal', 'Apple Pay'].map((method) => (
-                  <div
-                    key={method}
-                    className="bg-white/8 border border-white/10 rounded-lg px-3 py-1.5 text-xs font-semibold text-white/40"
-                  >
-                    {method}
-                  </div>
-                ))}
+              <div className="mt-4 flex flex-wrap gap-2">
+              {["mastercard", "visa", "amex", "mir"].map((method) => (
+                <img
+                  key={method}
+                  src={`/pay-methods/${method}.svg`}
+                  alt={method}
+                  width={42}
+                  height={30}
+                  className="h-[30px] w-[42px] object-contain"
+                />
+              ))}
+            </div>
               </div>
             </div>
           </div>

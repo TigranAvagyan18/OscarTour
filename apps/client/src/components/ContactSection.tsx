@@ -19,6 +19,8 @@ const rightVariants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.65, delay: 0.1, ease: 'easeOut' } },
 };
 
+const WHATSAPP_URL = 'https://wa.me/37455077010';
+
 export default function ContactSection() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -38,7 +40,7 @@ export default function ContactSection() {
   const contactItems = [
     { icon: Phone, label: t('home.contact.call'), value: '+374 55 077 010', sub: t('home.contact.callSub') },
     { icon: Mail, label: t('home.contact.email'), value: 'oscartour.am@gmail.com', sub: t('home.contact.emailSub') },
-    { icon: MessageCircle, label: t('home.contact.whatsapp'), value: '+374 55 077 010', sub: t('home.contact.whatsappSub') },
+    { icon: MessageCircle, label: t('home.contact.whatsapp'), value: '+374 55 077 010', sub: t('home.contact.whatsappSub'), href: WHATSAPP_URL },
   ];
 
   return (
@@ -73,23 +75,27 @@ export default function ContactSection() {
             </motion.p>
 
             <motion.div variants={itemVariants} className="space-y-4 mb-10">
-              {contactItems.map(({ icon: Icon, label, value, sub }) => (
-                <motion.div
-                  key={label}
-                  whileHover={{ x: 4, borderColor: '#bfdbfe' }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-cream border border-gray-100 hover:shadow-sm"
-                >
-                  <div className="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-brand-500" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{label}</p>
-                    <p className="text-dark font-semibold text-sm">{value}</p>
-                    <p className="text-gray-400 text-xs">{sub}</p>
-                  </div>
-                </motion.div>
-              ))}
+              {contactItems.map(({ icon: Icon, label, value, sub, href }) => {
+                const Wrapper = href ? motion.a : motion.div;
+                return (
+                  <Wrapper
+                    key={label}
+                    {...(href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    whileHover={{ x: 4, borderColor: '#bfdbfe' }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-cream border border-gray-100 hover:shadow-sm"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-brand-50 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-brand-500" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{label}</p>
+                      <p className="text-dark font-semibold text-sm">{value}</p>
+                      <p className="text-gray-400 text-xs">{sub}</p>
+                    </div>
+                  </Wrapper>
+                );
+              })}
             </motion.div>
 
             <motion.div variants={itemVariants} className="p-6 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-700 text-white">
@@ -97,15 +103,18 @@ export default function ContactSection() {
               <p className="text-white/70 text-sm mb-4">
                 {t('home.contact.consultDesc')}
               </p>
-              <motion.button
+              <motion.a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center gap-2 bg-white text-brand-600 font-semibold text-sm px-5 py-2.5 rounded-full hover:shadow-lg"
+                className="inline-flex items-center gap-2 bg-white text-brand-600 font-semibold text-sm px-5 py-2.5 rounded-full hover:shadow-lg"
               >
                 {t('home.contact.consultCta')}
                 <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
 

@@ -18,7 +18,7 @@ export default function HomePage() {
       <DestinationGrid />
       <TourPackages />
       <Testimonials />
-      <BlogPreview />
+      {/* <BlogPreview /> */}
       <ContactSection />
 		</>
 	)
